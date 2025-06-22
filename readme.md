@@ -1,4 +1,4 @@
-'''
+```
 sentiment-api/
 ├── index.js                    # Single entry point (server + app)
 ├── routes/
@@ -20,4 +20,4 @@ sentiment-api/
 ├── package.json
 ├── .gitignore
 └── README.md                   # (Optional) Docs for setup and usage
-'''
+```
