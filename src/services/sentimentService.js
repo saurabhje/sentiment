@@ -3,21 +3,23 @@ import Sentiment from 'sentiment';
 const analyzer = new Sentiment();
 
 export const analyzeTexts = (texts) => {
-    return texts.map((t) => analyzeSentinment(t))
+    return texts.map((text) => analyzeSentiment(text));
 };
 
-const analyzeSentinment = (text) =>{
+const analyzeSentiment = (text) => {
     const result = analyzer.analyze(text);
-    let sentimentLabel = 'neutral';
-    if (result.score >  0){
-        sentimentLabel = 'positive';
-    }else if (result.score < 0){
-        sentimentLabel = 'negative'
+    
+    let sentiment = 'neutral';
+    if (result.score > 0) {
+        sentiment = 'positive';
+    } else if (result.score < 0) {
+        sentiment = 'negative';
     }
-    return{
-        text,
-        sentiment: sentimentLabel,
-        score: result.score,
-        compartive: result.compartive
+    //normalize confidence to be between 0 and 1
+    // This is a simple heuristic and may not be accurate for all texts.
+    const confidence = Math.min(1, Math.abs(result.comparative)*2)
+    return {
+        sentiment,
+        confidence
     };
 };
