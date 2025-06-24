@@ -73,6 +73,12 @@ node server.js
 The server will start on port 3000 by default.
 
 ---
+## API Documentation
+
+Interactive API documentation is available via **Swagger UI**.
+
+Visit [http://localhost:3000/api-docs](http://localhost:3000/api-docs) after starting the server to explore and test the API endpoints.
+
 
 ## API Endpoint
 

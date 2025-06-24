@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: Sentiment Analysis API
+  version: 1.0.0
+  description: >
+    RESTful API that performs sentiment analysis on input text(s).
+    Supports both single and batch processing. Returns sentiment category
+    and confidence score for each input.
+
+paths:
+  /api/sentiment:
+    post:
+      summary: Analyze sentiment of text
+      description: >
+        Accepts either a single string or an array of strings in the request body.
+        Returns the sentiment (`positive`, `neutral`, or `negative`) along with a confidence score.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  oneOf:
+                    - type: string
+                      example: "I love programming!"
+                    - type: array
+                      items:
+                        type: string
+                      example:
+                        - "I love programming!"
+                        - "I hate bugs."
+                        - "It's okay, not great."
+      responses:
+        '200':
+          description: Sentiment analysis result(s)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                        sentiment:
+                          type: string
+                          enum: [positive, negative, neutral]
+                        confidence:
+                          type: number
+        '400':
+          description: Validation failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Validation failed
+                  details:
+                    type: array
+                    items:
+                      type: string
+        '429':
+          description: Too many requests (rate-limited)
+        '500':
+          description: Internal server error
