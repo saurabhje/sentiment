@@ -20,6 +20,7 @@ const analyzeSentiment = (text) => {
     const confidence = Math.min(1, Math.abs(result.comparative)*2)
     return {
         sentiment,
+        score: result.score,
         confidence
     };
 };

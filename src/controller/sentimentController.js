@@ -5,7 +5,6 @@ export const analyzeSentiment = (req, res) => {
     try {
         const results = analyzeTexts(req.texts);
         return res.status(200).json({
-            sucess: true,
             data: results
         });
     } catch (error) {
