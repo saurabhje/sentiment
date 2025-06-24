@@ -3,7 +3,9 @@ import logger from '../utils/logger.js';
 
 export const analyzeSentiment = (req, res) => {
     try {
-        const results = analyzeTexts(req.texts);
+        const input = req.body.text;
+        const texts = Array.isArray(input) ? input : [input];
+        const results = analyzeTexts(texts);
         return res.status(200).json({
             results
         });
@@ -13,7 +15,6 @@ export const analyzeSentiment = (req, res) => {
             stack: error.stack,
         })
         return res.status(500).json({
-            sucess: false,
             message: 'An error occurred while analyzing sentiment.',
             details: error.message
         });

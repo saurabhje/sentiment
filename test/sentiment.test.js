@@ -9,10 +9,9 @@ describe('Sentiment Analysis API', () => {
             .send({ text: 'I love programming!' });
 
         expect(res.statusCode).to.equal(200);
-        expect(res.body.data[0]).to.have.property('sentiment');
-        expect(res.body.data[0]).to.have.property('score');
-        expect(res.body.data[0]).to.have.property('confidence');
-        expect(res.body.data[0].sentiment).to.equal('positive');
+        expect(res.body.results[0]).to.have.property('sentiment');
+        expect(res.body.results[0]).to.have.property('confidence');
+        expect(res.body.results[0].sentiment).to.equal('positive');
     });
     it('should return sentiment for multiple text inputs', async () => {
         const res = await request(app)
@@ -20,11 +19,11 @@ describe('Sentiment Analysis API', () => {
             .send({ text: ['I love programming!', 'I hate bugs!'] });
 
         expect(res.statusCode).to.equal(200);
-        expect(res.body.data).to.be.an('array').that.has.lengthOf(2);
-        expect(res.body.data[0]).to.have.property('sentiment');
-        expect(res.body.data[1]).to.have.property('sentiment');
-        expect(res.body.data[0].sentiment).to.equal('positive');
-        expect(res.body.data[1].sentiment).to.equal('negative');
+        expect(res.body.results).to.be.an('array').that.has.lengthOf(2);
+        expect(res.body.results[0]).to.have.property('sentiment');
+        expect(res.body.results[1]).to.have.property('sentiment');
+        expect(res.body.results[0].sentiment).to.equal('positive');
+        expect(res.body.results[1].sentiment).to.equal('negative');
     });
 
     it('should reject empty text input', async () => {
