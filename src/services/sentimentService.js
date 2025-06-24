@@ -19,8 +19,8 @@ const analyzeSentiment = (text) => {
     // This is a simple heuristic and may not be accurate for all texts.
     const confidence = Math.min(1, Math.abs(result.comparative)*2)
     return {
+        text,
         sentiment,
-        score: result.score,
         confidence
     };
 };

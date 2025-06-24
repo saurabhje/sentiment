@@ -5,7 +5,7 @@ export const analyzeSentiment = (req, res) => {
     try {
         const results = analyzeTexts(req.texts);
         return res.status(200).json({
-            data: results
+            results
         });
     } catch (error) {
         logger.error('Error analyzing sentiment', {
