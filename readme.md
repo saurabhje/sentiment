@@ -5,10 +5,10 @@ A production-ready RESTful API for performing sentiment analysis on text using N
 ## Features
 
 - Single endpoint: `POST /api/sentiment`
-- Handles single and batch text inputs
+- Handles **both single and batch text inputs**
+- Batch processing with detailed results per input
 - Input validation:
   - Empty or non-string input
-  - Non-English text
 - Returns sentiment (`positive`, `neutral`, `negative`) with confidence score
 - Rate limiting to prevent abuse
 - Logging with Winston (requests and errors)
